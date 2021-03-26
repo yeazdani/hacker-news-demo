@@ -1,0 +1,6 @@
+<!-- <div fxLayout="row" fxLayoutAlign="center center">
+    <app-story></app-story>
+</div> -->
+<div fxLayout="row" fxLayoutAlign="center center" *ngFor="let story of (stories$ | async);let i = index">
+    <app-story [index]="i+1" [story]="story"></app-story>
+</div>

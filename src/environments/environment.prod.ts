@@ -1,3 +1,8 @@
 export const environment = {
-  production: true
+  production: true,
+  api: {
+    general: {
+      baseUrl: 'https://hacker-news.firebaseio.com'
+    }
+  },
 };

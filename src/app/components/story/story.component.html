@@ -1,0 +1,16 @@
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{index}}
+            </mat-panel-title>
+            <mat-panel-description>
+               {{story?.title}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <a [href]="story?.url">News Details</a>
+            <button mat-button color="primary" (click)="openCommentDialog()">View Comments</button>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
