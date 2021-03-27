@@ -1,9 +1,9 @@
-import { falseAction, loadComments, loadCommentsSuccess, loadStories, loadStoriesSuccess, loadTopStoryIdsSuccess } from './../actions/app.actions';
+import { falseAction, loadComments, loadCommentsSuccess, loading, loadStories, loadStoriesSuccess, loadTopStoryIdsSuccess } from './../actions/app.actions';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AppService } from 'src/app/services/app.service';
 import { loadTopStoryIds } from '../actions/app.actions';
-import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
 import { EMPTY, of, forkJoin } from 'rxjs';
 import { selectComments } from '../selectors/app.selectors';
 import { Store } from '@ngrx/store';
@@ -82,15 +82,19 @@ export class AppEffects {
                 if (!ifExits) {
                     return forkJoin(requests).pipe(
                         map((comnts: any[]) => {
-                            return loadCommentsSuccess(
+                            return comnts;
+                        }),
+                        switchMap((res: any) => [
+                            loadCommentsSuccess(
                                 {
                                     data: {
-                                        text: comnts,
+                                        text: res,
                                         parent: parentId
                                     }
                                 }
-                            );
-                        }),
+                            ),
+                            loading({ data: false })
+                        ]),
                         catchError(() => EMPTY)
                     );
                 } else {
@@ -99,15 +103,19 @@ export class AppEffects {
             } else {
                 return forkJoin(requests).pipe(
                     map((comnts: any[]) => {
-                        return loadCommentsSuccess(
+                        return comnts;
+                    }),
+                    switchMap((res: any) => [
+                        loadCommentsSuccess(
                             {
                                 data: {
-                                    text: comnts,
+                                    text: res,
                                     parent: parentId
                                 }
                             }
-                        );
-                    }),
+                        ),
+                        loading({ data: false })
+                    ]),
                     catchError(() => EMPTY)
                 );
             }
@@ -115,4 +123,6 @@ export class AppEffects {
     )
     );
 }
+
+
 

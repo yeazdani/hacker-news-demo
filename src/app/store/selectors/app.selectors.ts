@@ -17,3 +17,7 @@ export const selectComments = createSelector(
     selectAppState,
     (state: State) => state.comments
 );
+export const selectLoading = createSelector(
+    selectAppState,
+    (state: State) => state.loading
+);

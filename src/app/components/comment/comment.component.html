@@ -1,6 +1,10 @@
-<div fxLayout="row" fxLayoutAlign="space-between">
-    <span class="name-margin"><strong>{{name}}</strong></span>
-    <span>{{text}}</span>
+<div fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex="15" fxFlex.lt-md="30">
+        <span><strong> {{name}}</strong></span>
+    </div>
+    <div fxFlex="83" fxFlex.lt-md="70">
+        <p [innerHTML]="text"></p>
+    </div>
 </div>
 <br>
 <mat-divider></mat-divider>

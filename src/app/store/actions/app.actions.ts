@@ -28,6 +28,13 @@ export const loadCommentsSuccess = createAction(
     props<{ data: any }>()
 );
 
+/** ........... Loading.......... */
+export const loading = createAction(
+    '[Loading] Loading Action',
+    props<{ data: boolean }>()
+);
+
+
 /** ........... False Action .......... */
 export const falseAction = createAction(
     '[False Action] False Action',

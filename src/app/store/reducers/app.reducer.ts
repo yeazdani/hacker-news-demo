@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { Comment } from 'src/app/models/comment.model';
 import { Story } from 'src/app/models/story.model';
-import { loadCommentsSuccess, loadStoriesSuccess, loadTopStoryIdsSuccess } from '../actions/app.actions';
+import { loadCommentsSuccess, loading, loadStoriesSuccess, loadTopStoryIdsSuccess } from '../actions/app.actions';
 
 export const appFeatureKey = 'appState';
 
@@ -9,12 +9,14 @@ export interface State {
     storyIds: any[];
     stories: Story[];
     comments: any[];
+    loading: boolean;
 }
 
 export const initialState: State = {
     storyIds: [],
     stories: [],
     comments: [],
+    loading: false
 };
 
 export const reducer = createReducer(
@@ -38,5 +40,11 @@ export const reducer = createReducer(
             ...state,
             comments: [...comments],
         };
-    })
+    }),
+    on(loading, (state: any, action: any) => {
+        return {
+            ...state,
+            loading: action.data,
+        };
+    }),
 );
